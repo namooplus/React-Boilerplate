@@ -70,7 +70,7 @@ app.post('/api/users/login', (req, res) => {
         });
     });
 });
-app.post('/api/users/auth', auth, (req, res) => {
+app.get('/api/users/auth', auth, (req, res) => {
     // middleware를 통과해야 이 부분이 실행됨 (Authentication: True)
     res.status(200).json({
         _id: req.user._id,
@@ -83,7 +83,7 @@ app.post('/api/users/auth', auth, (req, res) => {
         image: req.user.image
     });
 });
-app.post('/api/users/logout', auth, (req, res) => {
+app.get('/api/users/logout', auth, (req, res) => {
     // middleware를 통과해야 이 부분이 실행됨 (Authentication: True)
     User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
         if(err) return res.json({ success: false, err });
